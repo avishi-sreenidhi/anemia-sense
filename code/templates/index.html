@@ -6,265 +6,273 @@
     <title>Anemia Predictor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-        }
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
 
-        header {
-            width: 100%;
-            height: 100vh;
-            background: url('bloodcells.jpg') no-repeat center center/cover;
-            position: relative;
-        }
+/* Header and Navigation */
+header {
+    width: 100%;
+    height: 100vh;
+    background: url('bloodcells.jpg') no-repeat center center/cover;
+    position: relative;
+}
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-        }
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
 
-        .logo {
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
+.logo {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
+.nav-links {
+    list-style: none;
+    display: flex;
+}
 
-        .nav-links li {
-            margin: 0 15px;
-        }
+.nav-links li {
+    margin: 0 15px;
+}
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
 
-        .btn {
-            background-color: #ff4b5c;
-            color: rgb(0, 0, 0);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #ffffff;
-        }
+.btn {
+    background-color: #ff4b5c;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
 
-        .burger {
-            display: none;
-            cursor: pointer;
-        }
+.btn:hover {
+    background-color: #ffffff;
+}
 
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 5px;
-        }
+.burger {
+    display: none;
+    cursor: pointer;
+}
 
-        .hero-section {
-            text-align: center;
-            color: white;
-            position: absolute;
-            top: 58%;
-            left: 28%;
-            transform: translate(-50%, -50%);
-        }
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+}
 
-        .hero-section h1 {
-            font-size: 2.5em;
-        }
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-        .hero-section p {
-            font-size: 1.2em;
-        }
+.hero-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
 
-        /* Info Section styles */
-        .info-section {
-            padding: 60px 20px;
-            text-align: center;
-        }
+.hero-section p {
+    font-size: 1.2em;
+}
 
-        .info-section h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+/* Info Section */
+.info-section {
+    padding: 60px 20px;
+    text-align: center;
+}
 
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.info-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
 
-        .card {
-            background: #fff;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            flex: 1 1 calc(25% - 40px);
-            box-sizing: border-box;
-            position: relative;
-            overflow: hidden;
-        }
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .card h3 {
-            margin-bottom: 10px;
-        }
+.card {
+    background: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(213, 48, 48, 0.1);
+    flex: 1 1 calc(25% - 40px);
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .card p {
-            font-size: 0.9em;
-        }
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-        /* Additional styling for the About section */
-        #about {
-            background: #f9f9f9;
-        }
+.card h3 {
+    margin-bottom: 10px;
+}
 
-        .card:nth-child(1) {
-            background: #e0f7fa;
-            border-left: 5px solid #00bcd4;
-        }
+.card p {
+    font-size: 0.9em;
+}
 
-        .card:nth-child(2) {
-            background: #fce4ec;
-            border-left: 5px solid #ec407a;
-        }
+.card-icon {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 4em;
+    color: rgba(255, 255, 255, 0.2);
+}
 
-        .card:nth-child(3) {
-            background: #e8f5e9;
-            border-left: 5px solid #66bb6a;
-        }
+/* Specific Card Backgrounds */
+.card:nth-child(1) {
+    background: #e0f7fa;
+    border-left: 5px solid #5c5252;
+}
 
-        .card:nth-child(4) {
-            background: #fff8e1;
-            border-left: 5px solid #ffca28;
-        }
+.card:nth-child(2) {
+    background: #fce4ec;
+    border-left: 5px solid #5c5252;
+}
 
-        .card-icon {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 4em;
-            color: rgba(255, 255, 255, 0.2);
-        }
+.card:nth-child(3) {
+    background: #e8f5e9;
+    border-left: 5px solid #5c5252;
+}
 
-        /* Form styling */
-        .prediction-form {
-            background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            text-align: left;
-            margin: auto;
-        }
+.card:nth-child(4) {
+    background: #fff8e1;
+    border-left: 5px solid #5c5252;
+}
 
-        .prediction-form h2 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
+/* Form Styling */
+.prediction-form {
+    background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+.prediction-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #000000;
-        }
+.form-group {
+    margin-bottom: 20px;
+}
 
-        .form-group input,
-        .form-group select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000;
+}
 
-        button.btn {
-            background-color: #000000;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-        }
+.form-group input,
+.form-group select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
 
-        button.btn:hover {
-            background-color: #0056b3;
-        }
+button.btn {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
 
-        /* Contact Us section styling */
-        #contact {
-            background: #f5f5f5;
-            padding: 40px 20px;
-            text-align: center;
-        }
+button.btn:hover {
+    background-color: #d84040;
+}
 
-        .contact-details {
-            display: inline-block;
-            text-align: left;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+/* Contact Section */
+#contact {
+    background: #f5f5f5;
+    padding: 40px 20px;
+    text-align: center;
+}
 
-        .contact-details p {
-            margin: 10px 0;
-        }
+.contact-details {
+    display: inline-block;
+    text-align: left;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-        .contact-details a {
-            color: #007bff;
-            text-decoration: none;
-        }
+.contact-details p {
+    margin: 10px 0;
+}
 
-        .contact-details a:hover {
-            text-decoration: underline;
-        }
+.contact-details a {
+    color: #d84040;
+    text-decoration: none;
+}
 
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+.contact-details a:hover {
+    text-decoration: underline;
+}
 
-            .burger {
-                display: block;
-            }
+/* Media Queries */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
 
-            .card {
-                flex: 1 1 calc(50% - 40px);
-            }
-        }
+    .burger {
+        display: block;
+    }
 
-        @media (max-width: 576px) {
-            .card {
-                flex: 1 1 calc(100% - 40px);
-            }
-        }
+    .card {
+        flex: 1 1 calc(50% - 40px);
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        flex: 1 1 calc(100% - 40px);
+    }
+}
 
     </style>
 </head>
@@ -275,10 +283,9 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#predict">Predict</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a class="btn" href="#">Check</a>
+            <a class="btn" href="predict.html">Predict</a>
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
@@ -318,42 +325,12 @@
             </div>
         </section>
 
-        <section id="predict" class="info-section">
-            <h2>Predict</h2>
-            <form class="prediction-form">
-                <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender">
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="hemoglobin">Hemoglobin (Range: 7-16):</label>
-                    <input type="number" id="hemoglobin" name="hemoglobin" min="7" max="16" required>
-                </div>
-                <div class="form-group">
-                    <label for="mch">Mean Corpuscular Hemoglobin (Range: 16-30):</label>
-                    <input type="number" id="mch" name="mch" min="16" max="30" required>
-                </div>
-                <div class="form-group">
-                    <label for="mchc">Mean Corpuscular Hemoglobin Concentration (Range: 28-34):</label>
-                    <input type="number" id="mchc" name="mchc" min="28" max="34" required>
-                </div>
-                <div class="form-group">
-                    <label for="mcv">Mean Corpuscular Volume (Range: 71-100):</label>
-                    <input type="number" id="mcv" name="mcv" min="71" max="100" required>
-                </div>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </section>
-
         <section id="contact" class="info-section">
             <h2>Contact Us</h2>
             <div class="contact-details">
                 <p><strong>The Smart Intern</strong></p>
                 <p>Tirupati, Andhra Pradesh</p>
-                <p>Phone: <a href="mailto:+91 99878 08574">+91 99878 08574</a></p>
+                <p>Phone: <a href="tel:+919987808574">+91 99878 08574</a></p>
                 <p>Email: <a href="mailto:abcdefgh.ijk@gmail.com">abcdefgh.ijk@gmail.com</a></p>
             </div>
         </section>
@@ -361,27 +338,26 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                window.scrollTo({
-                    top: targetSection.offsetTop,
-                    behavior: 'smooth'
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
                 });
             });
-        });
 
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('nav-active');
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+            });
         });
-    });
-
     </script>
 </body>
 </html>
