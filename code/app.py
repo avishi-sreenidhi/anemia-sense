@@ -5,9 +5,6 @@ import pickle
 from flask import Flask, request, render_template
 
 df = pd.read_csv('data/anemia.csv')
-print(df.head())
-
-print(df.info())
 
 @app.route('/')
 def home():
