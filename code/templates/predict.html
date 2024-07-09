@@ -147,7 +147,7 @@
     <main>
         <section id="predict" class="info-section">
             <h2>Enter the required details below</h2>
-            <form class="prediction-form">
+            <form class="prediction-form" action="/predict" method="post">
                 <div class="form-group">
                     <label for="gender">Gender:</label>
                     <select id="gender" name="gender">
@@ -157,19 +157,19 @@
                 </div>
                 <div class="form-group">
                     <label for="hemoglobin">Hemoglobin (Range: 7-16):</label>
-                    <input type="number" id="hemoglobin" name="hemoglobin" min="7" max="16" required>
+                    <input type="number" id="hemoglobin" name="hemoglobin" min="7" max="16" required step="0.1">
                 </div>
                 <div class="form-group">
                     <label for="mch">Mean Corpuscular Hemoglobin (Range: 16-30):</label>
-                    <input type="number" id="mch" name="mch" min="16" max="30" required>
+                    <input type="number" id="mch" name="mch" min="16" max="30" required step="0.1">
                 </div>
                 <div class="form-group">
                     <label for="mchc">Mean Corpuscular Hemoglobin Concentration (Range: 28-34):</label>
-                    <input type="number" id="mchc" name="mchc" min="28" max="34" required>
+                    <input type="number" id="mchc" name="mchc" min="28" max="34" required step="0.1">
                 </div>
                 <div class="form-group">
                     <label for="mcv">Mean Corpuscular Volume (Range: 71-100):</label>
-                    <input type="number" id="mcv" name="mcv" min="71" max="100" required>
+                    <input type="number" id="mcv" name="mcv" min="71" max="105" required step="0.1">
                 </div>
                 <button type="submit" class="btn">Submit</button>
             </form>
