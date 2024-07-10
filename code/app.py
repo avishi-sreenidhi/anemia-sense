@@ -1,5 +1,3 @@
-#not yet staged and sent to git, just local development for now
-
 from flask import Flask, request, render_template
 import pickle
 import numpy as np
