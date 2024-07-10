@@ -1,80 +1,52 @@
-import pickle 
+import pickle
 import warnings
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
-# splitting into train and test data
-df = pd.read_csv("data/anemia.csv")
-X =  df.drop('Result',axis=1)
-Y = df['Result']
-x_train,x_test,y_train,y_test = train_test_split(X,Y,test_size=0.2,random_state=20)
-
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report
-
-logistic_regression = LogisticRegression()
-logistic_regression.fit(x_train,y_train)
-y_pred = logistic_regression.predict(x_test)
-
-acc_lr = accuracy_score(y_test,y_pred)
-c_lr= classification_report(y_test,y_pred)
-
-from sklearn.ensemble import RandomForestClassifier
-
-random_forest = RandomForestClassifier()
-random_forest.fit(x_train,y_train)
-y_pred= random_forest.predict(x_test)
-
-acc_rf = accuracy_score(y_test,y_pred)
-c_rf= classification_report(y_test,y_pred)
-
-
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.tree import DecisionTreeClassifier
-
-decision_tree_model = DecisionTreeClassifier()
-decision_tree_model.fit(x_train,y_train)
-y_pred = decision_tree_model.predict(x_test)
-
-acc_dt = accuracy_score(y_test,y_pred)
-c_dt= classification_report(y_test,y_pred)
-
 from sklearn.naive_bayes import GaussianNB
-
-NB = GaussianNB()
-NB.fit(x_train,y_train)
-y_pred = NB.predict(x_test)
-
-acc_nb = accuracy_score(y_test,y_pred)
-c_nb= classification_report(y_test,y_pred)
-
 from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
 
-support_vector = SVC()
-support_vector.fit(x_train,y_train)
-y_pred = support_vector.predict(x_test)
+# Load and split data
+df = pd.read_csv("data/anemia.csv")
+X = df.drop('Result', axis=1)
+Y = df['Result']
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=20)
 
-acc_svc = accuracy_score(y_test,y_pred)
-c_svc= classification_report(y_test,y_pred)
+# Train and evaluate models
+models = {
+    'Logistic Regression': LogisticRegression(random_state=20),
+    'Random Forest': RandomForestClassifier(random_state=20),
+    'Decision Tree': DecisionTreeClassifier(random_state=20),
+    'Gaussian Naive Bayes': GaussianNB(),
+    'SVM': SVC(random_state=20),
+    'Gradient Boosting': GradientBoostingClassifier(random_state=20)
+}
 
-from sklearn.ensemble import GradientBoostingClassifier
+results = {}
 
-GBC = GradientBoostingClassifier()
-GBC.fit(x_train,y_train)
-y_pred = GBC.predict(x_test)
+for name, model in models.items():
+    model.fit(x_train, y_train)
+    y_pred = model.predict(x_test)
+    acc = accuracy_score(y_test, y_pred)
+    report = classification_report(y_test, y_pred)
+    results[name] = {'Accuracy': acc, 'Report': report}
 
-acc_gbc = accuracy_score(y_test,y_pred)
-c_gbc= classification_report(y_test,y_pred)
+# Print comparison of models
+compare_models = pd.DataFrame.from_dict({name: data['Accuracy'] for name, data in results.items()}, orient='index', columns=['Accuracy'])
+print(compare_models)
 
-# Testing model with multiple evaluation metrics
+# Save the best model (Gradient Boosting Classifier)
+best_model = models['Gradient Boosting']
+with open("model.pkl", "wb") as model_file:
+    pickle.dump(best_model, model_file)
 
-compareModels = pd.DataFrame({'Model' : ['Logistic Regression','Random Forest model', 'Decision Tree', 'Gaussian Naive Bayes', 'SVM', 'GBC'],'Score':[acc_lr,acc_rf,acc_dt,acc_nb,acc_svc,acc_gbc]})
-print(compareModels)
+# Test prediction
+test_input = [[0, 12.4, 23, 32.2, 76.1]]
+prediction = best_model.predict(test_input)
+print(f"Test prediction for input {test_input}: {prediction}")
 
-#saving the desired model and testing out the model
-
-pickle.dump(GBC,open("model.pkl","wb"))
-prediciton = GBC.predict([[0,12.4,23,32.2,76.1]])
-print(prediciton)
-warnings.warn("Model might not have valid feature names for predictions")
-
+# Handle potential warnings
+warnings.warn("Ensure the input data has valid feature names when making predictions.")
